@@ -1,4 +1,4 @@
 package models;
 
-public abstract class people {
+public abstract class People {
 }

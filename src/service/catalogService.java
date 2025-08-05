@@ -1,4 +1,4 @@
 package service;
 
-public class catalogService {
+public class CatalogService {
 }

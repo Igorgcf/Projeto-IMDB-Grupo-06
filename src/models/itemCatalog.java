@@ -1,4 +1,4 @@
 package models;
 
-public abstract class itemCatalog {
+public abstract class ItemCatalog {
 }

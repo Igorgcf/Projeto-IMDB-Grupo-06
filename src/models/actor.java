@@ -1,4 +1,4 @@
 package models;
 
-public  class actor {
+public class Actor {
 }
