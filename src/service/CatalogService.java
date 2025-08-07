@@ -36,12 +36,13 @@ public class CatalogService {
             switch (opcao) {
                 case 1 -> registerMovie();
                 case 2 -> registerSeries();
-                case 3 -> registerActor();
-                case 4 -> registerDirector();
-                case 5 -> associateMovie();
-                case 6 -> associateSeries();
-                case 7 -> searchMovie();
-                case 8 -> searchSeries();
+                case 3 -> updateSeries();
+                case 4 -> registerActor();
+                case 5 -> registerDirector();
+                case 6 -> associateMovie();
+                case 7 -> associateSeries();
+                case 8 -> searchMovie();
+                case 9 -> searchSeries();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida.");
             }
@@ -60,6 +61,45 @@ public class CatalogService {
 
         series.add(new Series(name, date, seasons, description));
         System.out.println("Série cadastrada!");
+    }
+
+    public static void updateSeries(){
+        System.out.println("Atualização de Série");
+        Series serie = selectSeries();
+        System.out.print("Novo nome (deixe em branco para não alterar): ");
+        String name = scanner.nextLine();
+        if (!name.isEmpty()) {
+            serie.setName(name);
+        }
+        System.out.print("Nova data de lançamento (deixe em branco para não alterar): ");
+        String date = scanner.nextLine();
+        if (!date.isEmpty()) {
+            serie.setReleaseDate(date);
+        }
+        System.out.print("Número de temporadas (deixe em branco para não alterar): ");
+        String seasonsInput = scanner.nextLine();
+        if (!seasonsInput.isEmpty()) {
+            int seasons = Integer.parseInt(seasonsInput);
+            serie.setSeasons(seasons);
+        }
+        System.out.print("Nova descrição (deixe em branco para não alterar): ");
+        String description = scanner.nextLine();
+        if (!description.isEmpty()) {
+            serie.setDescription(description);
+        }
+
+        System.out.println("Série atualizada com sucesso!");
+    }
+
+    public void findAllSeries() {
+        if (series.isEmpty()) {
+            System.out.println("Nenhuma série cadastrada.");
+            return;
+        }
+        System.out.println("Séries cadastradas:");
+        for (Series serie : series) {
+            serie.viewBase();
+        }
     }
 
     private static Series selectSeries() {
