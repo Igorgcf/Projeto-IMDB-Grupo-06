@@ -1,14 +1,14 @@
 package models;
 
 public class Actor extends Person {
-    private final String personagem;
+    private final String character;
 
-    public Actor(String nome, int idade, String nacionalidade, String personagem) {
-        super(nome, idade, nacionalidade);
-        this.personagem = personagem;
+    public Actor(String name,  int age, String nationality, String character) {
+        super(name,  age, nationality);
+        this.character = character;
     }
 
     public void descreverPapel() {
-        System.out.println(getNome() + " interpreta o personagem: " + personagem);
+        System.out.println(getName() + " interpreta o personagem: " + character);
     }
 }
