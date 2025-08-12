@@ -1,50 +1,50 @@
 package models;
 
 public abstract class Person {
-    private String nome;
-    private int idade;
-    private String nacionalidade;
+    private String name;
+    private int age;
+    private String Nationality;
 
-    public Person(String nome, int idade, String nacionalidade) {
-        this.nome = nome;
-        this.idade = idade;
-        this.nacionalidade = nacionalidade;
+    public int getAge() {
+        return age;
     }
 
-    public Person() {
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    public String getNationality() {
+        return Nationality;
+    }
+
+    public void setNationality(String nationality) {
+        Nationality = nationality;
+    }
+
+    public Person(String name, int age, String nationality) {
+        this.name = name;
+        this.age = age;
+        this.Nationality = nationality;
+
 
     }
 
-    // Getters e Setters
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = "Roberto";
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public String getNacionalidade() {
-        return nacionalidade;
-    }
-
-    public void setNacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
-    }
 
     // Método comum
     public void exibirInfo() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + idade);
-        System.out.println("Nacionalidade: " + nacionalidade);
+        System.out.println("Nome: " + name);
+        System.out.println("Idade: " + age );
+        System.out.println("Nacionalidade: " + Nationality);
     }
 
     // Método abstrato — cada tipo de Persona define seu papel
