@@ -1,6 +1,7 @@
 package service;
 
 import models.Actor;
+import models.Director;
 import models.ItemCatalog;
 import models.Series;
 
@@ -59,8 +60,10 @@ public class CatalogService {
         int seasons = Integer.parseInt(scanner.nextLine());
         System.out.print("Descrição: ");
         String description = scanner.nextLine();
+        System.out.println("Orçamento");
+        double budget = Double.parseDouble(scanner.nextLine());
 
-        series.add(new Series(name, date, seasons, description));
+        series.add(new Series(name, date, seasons, description,budget));
         System.out.println("Série cadastrada!");
     }
 
@@ -75,7 +78,7 @@ public class CatalogService {
         System.out.print("Nova data de lançamento (deixe em branco para não alterar): ");
         String date = scanner.nextLine();
         if (!date.isEmpty()) {
-            serie.setReleaseDate(date);
+            serie.setCreationDate(date);
         }
         System.out.print("Número de temporadas (deixe em branco para não alterar): ");
         String seasonsInput = scanner.nextLine();
@@ -174,9 +177,13 @@ public class CatalogService {
         System.out.print("Nome do Ator: ");
         String name = scanner.nextLine();
         System.out.print("Data de Nascimento: ");
-        String date = scanner.nextLine();
+        int age = scanner.nextInt();
+        System.out.print("Nacionalidade: ");
+        String nationality = scanner.nextLine();
+        System.out.println("Papel");
+        String character = scanner.nextLine();
 
-        actors.add(new Actor(name, date));
+        actors.add(new Actor(name, age, nationality, character));
         System.out.println("Ator cadastrado!");
     }
 
@@ -185,9 +192,13 @@ public class CatalogService {
         System.out.print("Nome do Diretor: ");
         String name = scanner.nextLine();
         System.out.print("Data de Nascimento: ");
-        String date = scanner.nextLine();
+        int age = scanner.nextInt();
+        System.out.println("Nacionalidade");
+        String nationality = scanner.nextLine();
+        System.out.println("Estilo de Direção");
+        String drivingstyle = scanner.nextLine();
 
-        directors.add(new Director(name, date));
+        directors.add(new Director(name, age,nationality,drivingstyle));
         System.out.println("Diretor cadastrado!");
     }
 }

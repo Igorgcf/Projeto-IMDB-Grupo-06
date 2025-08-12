@@ -69,4 +69,12 @@ public abstract class ItemCatalog {
     public List<Actor> getActors() {
         return actors;
     }
+
+    public void setDirector(Director director) {
+    }
+
+    public boolean nameContains(String term) {
+        return name.toLowerCase().contains(term.toLowerCase());
+    }
+
 }
