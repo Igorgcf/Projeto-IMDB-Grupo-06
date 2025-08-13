@@ -1,17 +1,19 @@
 package models;
 
 public class Director extends Person {
-    public Director(String name,  int age, String nationality, String drivingstyle) {
-        super(name,  age, nationality);
-        Drivingstyle = drivingstyle;
+
+    private String drivingStyle;
+
+    public Director(String name, int age, String nationality, String drivingStyle, String document) {
+        super(name,  age, nationality, document);
+        drivingStyle = drivingStyle;
     }
 
-    private final String Drivingstyle;
+    public String getDrivingStyle() {
+        return drivingStyle;
+    }
 
-
-
-    @Override
-    public void descreverPapel() {
-        System.out.println(getName() + " é o diretor com estilo: " + Drivingstyle);
+    public void setDrivingStyle(String drivingStyle) {
+        this.drivingStyle = drivingStyle;
     }
 }

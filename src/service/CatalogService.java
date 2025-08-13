@@ -4,16 +4,17 @@ import models.Actor;
 import models.Director;
 import models.ItemCatalog;
 import models.Series;
+import repository.DbLocal;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CatalogService {
 
-    private static List<Series> series = new ArrayList<>();
-    private static List<Actor> actors = new ArrayList<>();
-    private static List<Director> directors = new ArrayList<>();
+    private DbLocal dbLocal;
+
+    public CatalogService(DbLocal dbLocal) {
+        this.dbLocal = dbLocal;
+    }
 
     static Scanner scanner = new Scanner(System.in);
 
@@ -36,26 +37,24 @@ public class CatalogService {
             opcao = Integer.parseInt(scanner.nextLine());
 
             switch (opcao) {
-                case 1 -> registerMovie();
+                //case 1 -> registerMovie();
                 case 2 -> registerSeries();
-                case 3 -> updateSeries();
-                case 4 -> registerActor();
-                case 5 -> registerDirector();
-                case 6 -> associateMovie();
-                case 7 -> associateSeries();
-                case 8 -> searchMovie();
-                case 9 -> searchSeries();
+                //case 3 -> updateSeries();
+                //case 4 -> registerActor();
+                //case 5 -> registerDirector();
+                //case 6 -> associateMovie();
+                //case 7 -> associateSeries();
+               // case 8 -> searchMovie();
+                //case 9 -> searchSeries();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
 
-    private static void registerSeries() {
+    private void registerSeries() {
         System.out.print("Nome da Série: ");
         String name = scanner.nextLine();
-        System.out.print("Data de Lançamento: ");
-        String date = scanner.nextLine();
         System.out.print("Número de Temporadas: ");
         int seasons = Integer.parseInt(scanner.nextLine());
         System.out.print("Descrição: ");
@@ -63,11 +62,15 @@ public class CatalogService {
         System.out.println("Orçamento");
         double budget = Double.parseDouble(scanner.nextLine());
 
-        series.add(new Series(name, date, seasons, description,budget));
+        Series serie = new Series(name, description, seasons);
+        serie.setBudget(budget);
+
+        dbLocal.addItemCatalog(serie);
+        System.out.println(""+dbLocal.getAllItemCatalog().size());
         System.out.println("Série cadastrada!");
     }
-
-    public static void updateSeries(){
+    /*
+    public void updateSeries(){
         System.out.println("Atualização de Série");
         Series serie = selectSeries();
         System.out.print("Novo nome (deixe em branco para não alterar): ");
@@ -78,7 +81,7 @@ public class CatalogService {
         System.out.print("Nova data de lançamento (deixe em branco para não alterar): ");
         String date = scanner.nextLine();
         if (!date.isEmpty()) {
-            serie.setCreationDate(date);
+            //serie.setCreationDate(date);
         }
         System.out.print("Número de temporadas (deixe em branco para não alterar): ");
         String seasonsInput = scanner.nextLine();
@@ -95,7 +98,9 @@ public class CatalogService {
         System.out.println("Série atualizada com sucesso!");
     }
 
+
     public void findAllSeries() {
+
         if (series.isEmpty()) {
             System.out.println("Nenhuma série cadastrada.");
             return;
@@ -104,18 +109,22 @@ public class CatalogService {
         for (Series serie : series) {
             serie.viewBase();
         }
+
     }
 
-    private static Series selectSeries() {
+    private Series selectSeries() {
+         /*
         System.out.println("Selecione uma série:");
         for (int i = 0; i < series.size(); i++) {
             System.out.println(i + " - " + series.get(i).getName());
         }
         int idx = Integer.parseInt(scanner.nextLine());
         return series.get(idx);
+
+
     }
 
-    private static void searchSeries() {
+    private void searchSeries() {
         System.out.print("Digite o nome da série: ");
         String term = scanner.nextLine();
         boolean encontrado = false;
@@ -130,7 +139,7 @@ public class CatalogService {
         }
     }
 
-    private static void associateSeries() {
+    private void associateSeries() {
         if (series.isEmpty()) {
             System.out.println("Nenhuma série cadastrada.");
             return;
@@ -139,7 +148,7 @@ public class CatalogService {
         associateWork(series);
     }
 
-    private static void associateWork
+    private void associateWork
             (ItemCatalog work) {
         if (directors.isEmpty()) {
             System.out.println("Nenhum diretor cadastrado.");
@@ -172,7 +181,7 @@ public class CatalogService {
         System.out.println("Associação feita com sucesso!");
     }
 
-    private static void registerActor() {
+    private void registerActor() {
         System.out.println();
         System.out.print("Nome do Ator: ");
         String name = scanner.nextLine();
@@ -187,7 +196,7 @@ public class CatalogService {
         System.out.println("Ator cadastrado!");
     }
 
-    private static void registerDirector() {
+    private void registerDirector() {
         System.out.println();
         System.out.print("Nome do Diretor: ");
         String name = scanner.nextLine();
@@ -201,5 +210,6 @@ public class CatalogService {
         directors.add(new Director(name, age,nationality,drivingstyle));
         System.out.println("Diretor cadastrado!");
     }
+    */
 }
 

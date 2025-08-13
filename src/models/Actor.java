@@ -1,14 +1,24 @@
 package models;
 
+import java.util.List;
+
 public class Actor extends Person {
-    private final String character;
+    private List<String> characters;
 
-    public Actor(String name,  int age, String nationality, String character) {
-        super(name,  age, nationality);
-        this.character = character;
+    public Actor(String name, int age, String nationality, String document) {
+        super(name,  age, nationality, document);
     }
 
-    public void descreverPapel() {
-        System.out.println(getName() + " interpreta o personagem: " + character);
+    public List<String> getAllCharacters() {
+        return characters;
     }
+
+    public void addCharacter(String character) {
+        characters.add(character);
+    }
+
+    public void removeCharacter(String character) {
+        characters.remove(character);
+    }
+
 }

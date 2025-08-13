@@ -3,7 +3,15 @@ package models;
 public abstract class Person {
     private String name;
     private int age;
-    private String Nationality;
+    private String nationality;
+    private String document;
+
+    public Person(String name, int age, String nationality, String document) {
+        this.name = name;
+        this.age = age;
+        this.nationality = nationality;
+        this.document = document;
+    }
 
     public int getAge() {
         return age;
@@ -21,32 +29,19 @@ public abstract class Person {
         this.name = name;
     }
 
-
-
     public String getNationality() {
-        return Nationality;
+        return nationality;
     }
 
     public void setNationality(String nationality) {
-        Nationality = nationality;
+        this.nationality = nationality;
     }
 
-    public Person(String name, int age, String nationality) {
-        this.name = name;
-        this.age = age;
-        this.Nationality = nationality;
-
-
+    public String getDocument() {
+        return name;
     }
 
-
-    // Método comum
-    public void exibirInfo() {
-        System.out.println("Nome: " + name);
-        System.out.println("Idade: " + age );
-        System.out.println("Nacionalidade: " + Nationality);
+    public void setDocument(String document) {
+        this.document = document;
     }
-
-    // Método abstrato — cada tipo de Persona define seu papel
-    public abstract void descreverPapel();
 }
