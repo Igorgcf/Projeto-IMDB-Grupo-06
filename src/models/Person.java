@@ -38,10 +38,14 @@ public abstract class Person {
     }
 
     public String getDocument() {
-        return name;
+        return this.document;
     }
 
     public void setDocument(String document) {
         this.document = document;
+    }
+
+    public String getByDocument(String document) {
+        return this.document.contains(document) ? this.document : null ;
     }
 }

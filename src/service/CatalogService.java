@@ -1,11 +1,9 @@
 package service;
 
-import models.Actor;
-import models.Director;
-import models.ItemCatalog;
-import models.Series;
+import models.*;
 import repository.DbLocal;
 
+import java.sql.Time;
 import java.util.Scanner;
 
 public class CatalogService {
@@ -26,26 +24,22 @@ public class CatalogService {
             System.out.println("1. Cadastrar Filme");
             System.out.println("2. Cadastrar Série");
             System.out.println("3. Atualizar Série");
-            System.out.println("4. Cadastrar Ator");
-            System.out.println("5. Cadastrar Diretor");
-            System.out.println("6. Associar Atores e Diretor (Filme)");
-            System.out.println("7. Associar Atores e Diretor (Série)");
-            System.out.println("8. Pesquisar Filme por Nome");
-            System.out.println("9. Pesquisar Série por Nome");
+            System.out.println("4. Associar Atores e Diretor (Filme)");
+            System.out.println("5. Associar Atores e Diretor (Série)");
+            System.out.println("6. Pesquisar Filme por Nome");
+            System.out.println("7. Pesquisar Série por Nome");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
             opcao = Integer.parseInt(scanner.nextLine());
 
             switch (opcao) {
-                //case 1 -> registerMovie();
+                case 1 -> registerMovie();
                 case 2 -> registerSeries();
-                //case 3 -> updateSeries();
-                //case 4 -> registerActor();
-                //case 5 -> registerDirector();
-                //case 6 -> associateMovie();
-                //case 7 -> associateSeries();
-               // case 8 -> searchMovie();
-                //case 9 -> searchSeries();
+                case 3 -> updateSeries();
+                case 4 -> associateMovie();
+                case 5 -> associateSeries();
+                case 6 -> searchMovie();
+                case 7 -> searchSeries();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida.");
             }
@@ -53,6 +47,7 @@ public class CatalogService {
     }
 
     private void registerSeries() {
+        //chamar view
         System.out.print("Nome da Série: ");
         String name = scanner.nextLine();
         System.out.print("Número de Temporadas: ");
@@ -64,83 +59,127 @@ public class CatalogService {
 
         Series serie = new Series(name, description, seasons);
         serie.setBudget(budget);
+        dbLocal.addSerie(serie);
 
-        dbLocal.addItemCatalog(serie);
-        System.out.println(""+dbLocal.getAllItemCatalog().size());
-        System.out.println("Série cadastrada!");
+        //chamar view System.out.println("Série " + dbLocal.getSeriesByName(serie.getName()).getName() + " cadastrada!");
     }
-    /*
+
+    private void registerMovie() {
+        //chamar view
+        System.out.print("Nome do filme: ");
+        String name = scanner.nextLine();
+        System.out.print("Descrição: ");
+        String description = scanner.nextLine();
+        System.out.println("Duração");
+        Time duration = Time.valueOf(scanner.nextLine());
+
+        Movie movie = new Movie(name, description, duration);
+        dbLocal.addMovie(movie);
+
+        //chamar view System.out.println("Série " + dbLocal.getSeriesByName(serie.getName()).getName() + " cadastrada!");
+    }
+
     public void updateSeries(){
-        System.out.println("Atualização de Série");
+        //chamar view System.out.println("Atualização de Série");
         Series serie = selectSeries();
-        System.out.print("Novo nome (deixe em branco para não alterar): ");
+        //chamar view System.out.print("Novo nome (deixe em branco para não alterar): ");
         String name = scanner.nextLine();
         if (!name.isEmpty()) {
             serie.setName(name);
         }
-        System.out.print("Nova data de lançamento (deixe em branco para não alterar): ");
+        //chamar view System.out.print("Nova data de lançamento (deixe em branco para não alterar): ");
         String date = scanner.nextLine();
         if (!date.isEmpty()) {
             //serie.setCreationDate(date);
         }
-        System.out.print("Número de temporadas (deixe em branco para não alterar): ");
+        //chamar view System.out.print("Número de temporadas (deixe em branco para não alterar): ");
         String seasonsInput = scanner.nextLine();
         if (!seasonsInput.isEmpty()) {
             int seasons = Integer.parseInt(seasonsInput);
             serie.setSeasons(seasons);
         }
-        System.out.print("Nova descrição (deixe em branco para não alterar): ");
+        //chamar view System.out.print("Nova descrição (deixe em branco para não alterar): ");
         String description = scanner.nextLine();
         if (!description.isEmpty()) {
             serie.setDescription(description);
         }
 
-        System.out.println("Série atualizada com sucesso!");
+        //chamar view System.out.println("Série atualizada com sucesso!");
     }
 
 
     public void findAllSeries() {
 
-        if (series.isEmpty()) {
-            System.out.println("Nenhuma série cadastrada.");
+        if (this.dbLocal.getAllSeries().isEmpty()) {
+            //chamar view System.out.println("Nenhuma série cadastrada.");
             return;
         }
-        System.out.println("Séries cadastradas:");
-        for (Series serie : series) {
-            serie.viewBase();
+        //chamar view System.out.println("Séries cadastradas:");
+        for (Series serie : this.dbLocal.getAllSeries()) {
+            //chamar view
+            //return selected
         }
 
     }
 
     private Series selectSeries() {
-         /*
-        System.out.println("Selecione uma série:");
-        for (int i = 0; i < series.size(); i++) {
-            System.out.println(i + " - " + series.get(i).getName());
-        }
-        int idx = Integer.parseInt(scanner.nextLine());
-        return series.get(idx);
 
 
+        //chamar view System.out.println("Selecione uma série:");
+        //this.dbLocal.getAllSeries())
+        //chamar viu de seleção de serie
+
+        //dummy
+        return new Series(" ", " ");
+    }
+
+    private Movie selectMovie() {
+
+
+        //chamar view System.out.println("Selecione uma série:");
+        //this.dbLocal.getAllSeries())
+        //chamar viu de seleção de serie
+
+        //dummy
+        return new Movie(" ", " ", new Time(2));
     }
 
     private void searchSeries() {
-        System.out.print("Digite o nome da série: ");
-        String term = scanner.nextLine();
-        boolean encontrado = false;
-        for (Series serie : series) {
-            if (serie.nameContains(term)) {
-                serie.viewBase();
-                encontrado = true;
+        //chamar view System.out.print("Digite o nome da série: ");
+        String name = scanner.nextLine();
+        if (this.dbLocal.getAllSeries().isEmpty()) {
+            //chamar view System.out.println("Nenhuma série cadastrada.");
+            return;
+        }
+        for (Series serie : this.dbLocal.getAllSeries()) {
+            if (serie.getName().contains(name)) {
+                //chamar view
+                //return selected
             }
         }
-        if (!encontrado) {
-            System.out.println("Nenhuma série encontrada com esse nome.");
+        //chamar view System.out.println("Nenhuma série encontrada.");
+
+    }
+
+    private void searchMovie() {
+        //chamar view System.out.print("Digite o nome do filme: ");
+        String name = scanner.nextLine();
+        if (this.dbLocal.getAllMovies().isEmpty()) {
+            //chamar view System.out.println("Nenhum filme cadastrado.");
+            return;
         }
+        for (Movie movie : this.dbLocal.getAllMovies()) {
+            if (movie.getName().contains(name)) {
+                //chamar view
+                //return selected
+            }
+        }
+        //chamar view System.out.println("Nenhuma série encontrada.");
+
     }
 
     private void associateSeries() {
-        if (series.isEmpty()) {
+        if (this.dbLocal.getAllSeries().isEmpty()) {
             System.out.println("Nenhuma série cadastrada.");
             return;
         }
@@ -148,68 +187,36 @@ public class CatalogService {
         associateWork(series);
     }
 
-    private void associateWork
-            (ItemCatalog work) {
-        if (directors.isEmpty()) {
-            System.out.println("Nenhum diretor cadastrado.");
+    private void associateMovie() {
+        if (this.dbLocal.getAllMovies().isEmpty()) {
+            System.out.println("Nenhuma série cadastrada.");
             return;
         }
-        System.out.println("Selecione um diretor:");
-        for (int i = 0; i < directors.size(); i++) {
-            System.out.println(i + " - " + directors.get(i).getName());
-        }
-        int idxDiretor = Integer.parseInt(scanner.nextLine());
-        work.setDirector(directors.get(idxDiretor));
+        Movie movie = selectMovie();
+        associateWork(movie);
+    }
 
-        if (actors.isEmpty()) {
-            System.out.println("Nenhum ator cadastrado.");
+    private void associateWork(ItemCatalog work) {
+        if (work.getAllDirectors().isEmpty()) {
+            //chamar view System.out.println("Nenhum diretor cadastrado.");
             return;
         }
-        System.out.println("Adicione atores (digite o número, -1 para encerrar):");
-        for (int i = 0; i < actors.size(); i++) {
-            System.out.println(i + " - " + actors.get(i).getName());
-        }
-        int idxAtor;
-        while ((idxAtor = Integer.parseInt(scanner.nextLine())) != -1) {
-            if (idxAtor >= 0 && idxAtor < actors.size()) {
-                work.addActor(actors.get(idxAtor));
-            } else {
-                System.out.println("Índice inválido.");
-            }
+        //chamar view System.out.println("Selecione um diretor:");
+        for (Director director : work.getAllDirectors()) {
+            //chamar view
+            //return selected
         }
 
-        System.out.println("Associação feita com sucesso!");
+        if (work.getAllActors().isEmpty()) {
+            //chamar view System.out.println("Nenhum ator cadastrado.");
+            return;
+        }
+
+        //chamar view System.out.println("Adicione atores (digite o número, -1 para encerrar):");
+        //chamar view de adição para retornar selecionado
+
+        //chamar view  System.out.println("Associação feita com sucesso!");
     }
 
-    private void registerActor() {
-        System.out.println();
-        System.out.print("Nome do Ator: ");
-        String name = scanner.nextLine();
-        System.out.print("Data de Nascimento: ");
-        int age = scanner.nextInt();
-        System.out.print("Nacionalidade: ");
-        String nationality = scanner.nextLine();
-        System.out.println("Papel");
-        String character = scanner.nextLine();
-
-        actors.add(new Actor(name, age, nationality, character));
-        System.out.println("Ator cadastrado!");
-    }
-
-    private void registerDirector() {
-        System.out.println();
-        System.out.print("Nome do Diretor: ");
-        String name = scanner.nextLine();
-        System.out.print("Data de Nascimento: ");
-        int age = scanner.nextInt();
-        System.out.println("Nacionalidade");
-        String nationality = scanner.nextLine();
-        System.out.println("Estilo de Direção");
-        String drivingstyle = scanner.nextLine();
-
-        directors.add(new Director(name, age,nationality,drivingstyle));
-        System.out.println("Diretor cadastrado!");
-    }
-    */
 }
 
