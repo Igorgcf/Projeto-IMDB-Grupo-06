@@ -22,6 +22,4 @@ public class Series extends ItemCatalog  {
     public void getSeasons(int seasons) {
       this.seasons = seasons;
     }
-
-
 }

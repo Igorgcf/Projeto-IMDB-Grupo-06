@@ -50,9 +50,7 @@ public class DbLocal {
     }
 
     public void addSerie(Series series) {
-        if (this.series.stream().filter(s -> s.getName().equals(series.getName())).findFirst().orElse(null) != null){
-            //avisa que ja existee
-        }else {
+        if (this.series.stream().filter(s -> s.getName().equals(series.getName())).findFirst().orElse(null) == null){
             this.series.add(series);
             this.itemsCatalog.add(series);
         }
@@ -64,11 +62,30 @@ public class DbLocal {
     }
 
     public void addMovie(Movie movie) {
-        if (this.movies.stream().filter(s -> s.getName().equals(movie.getName())).findFirst().orElse(null) != null){
-            //avisa que ja existee
-        }else {
+        if (this.movies.stream().filter(s -> s.getName().equals(movie.getName())).findFirst().orElse(null) == null){
             this.movies.add(movie);
             this.itemsCatalog.add(movie);
+        }
+    }
+
+    public void setMovie(Movie movie) {
+        Movie oldMovie = this.movies.stream().filter(s -> s.getName().equals(movie.getName())).findFirst().orElse(null);
+
+        if (oldMovie != null){
+            this.movies.remove(oldMovie);
+            this.itemsCatalog.remove(oldMovie);
+            this.addMovie(movie);
+        }
+
+    }
+
+    public void setSeries(Series series) {
+        Series oldSeries = this.series.stream().filter(s -> s.getName().equals(series.getName())).findFirst().orElse(null);
+
+        if (oldSeries != null){
+            this.series.remove(oldSeries);
+            this.itemsCatalog.remove(oldSeries);
+            this.addSerie(series);
         }
     }
 
@@ -86,9 +103,7 @@ public class DbLocal {
     }
 
     public void addUser(User user) {
-        if (this.users.stream().filter(s -> s.getName().equals(user.getName())).findFirst().orElse(null) != null){
-            //avisa que ja existee
-        }else {
+        if (this.users.stream().filter(s -> s.getName().equals(user.getName())).findFirst().orElse(null) == null){
             this.users.add(user);
         }
     }

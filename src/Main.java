@@ -1,11 +1,11 @@
 import repository.DbLocal;
 import service.CatalogService;
+import view.Menu;
+
 
 public class Main {
     public static void main(String[] args) {
-
-        DbLocal dbLocal = new DbLocal();
-        CatalogService catalogService = new CatalogService(dbLocal);
-        catalogService.menu();
+        Menu view = new Menu();
+        view.menu();
     }
 }

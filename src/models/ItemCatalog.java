@@ -1,6 +1,7 @@
 package models;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Objects;
 public abstract class ItemCatalog {
 
     private String name;
-    private Date releaseDate;
+    private LocalDate releaseDate;
     private String description;
     private double budget;
     private double collected;
@@ -22,7 +23,7 @@ public abstract class ItemCatalog {
         this.description = description;
     }
 
-    public ItemCatalog(String name, String description, Date releaseDate) {
+    public ItemCatalog(String name, String description, LocalDate releaseDate) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
@@ -55,11 +56,11 @@ public abstract class ItemCatalog {
         this.rating = rating;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
