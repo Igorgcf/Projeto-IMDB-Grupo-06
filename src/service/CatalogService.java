@@ -24,7 +24,7 @@ public class CatalogService {
 
     public void registerSeries() {
 
-        dbLocal.addSerie(this.register.registerSeries());
+        dbLocal.addSerie(this.register.registerSerie());
 
     }
 
@@ -146,10 +146,8 @@ public class CatalogService {
 
     public void associateWorkSeriesDirector(ItemCatalog work) {
 
-        if (work.getAllDirectors().isEmpty()) {
-            System.out.println("Nenhum diretor cadastrado.");
-            return;
-        }
+        System.out.println("Cadastro do ator:");
+
         System.out.println("Adicione um direto (digite o número, -1 para encerrar):");
         for (int i = 0; i < work.getAllDirectors().size(); i++) {
             System.out.println(i + " - " + work.getAllDirectors().get(i).getName());
@@ -170,10 +168,9 @@ public class CatalogService {
 
     public void associateWorkMovieActor(ItemCatalog work) {
 
-        if (work.getAllActors().isEmpty()) {
-            System.out.println("Nenhum ator cadastrado.");
-            return;
-        }
+        System.out.println("Cadastro do ator:");
+
+
         System.out.println("Adicione atores (digite o número, -1 para encerrar):");
         for (int i = 0; i < work.getAllActors().size(); i++) {
             System.out.println(i + " - " + work.getAllActors().get(i).getName());

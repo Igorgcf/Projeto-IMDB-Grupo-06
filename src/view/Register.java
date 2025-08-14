@@ -47,7 +47,7 @@ public class Register {
         return movie;
     }
 
-    public Series registerSeries() {
+    public Series registerSerie() {
 
         System.out.print("Nome da Série: ");
         String name = scanner.nextLine();
@@ -62,7 +62,6 @@ public class Register {
         if (!inputDate.isEmpty()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate date = LocalDate.parse(inputDate, formatter);
-            registerSeries().setReleaseDate(date);
         }
 
         Series Series = new Series(name, description, seasons);
