@@ -112,7 +112,61 @@ public class CatalogService {
 
     }
 
-    
+    public void associateSeries() {
+        Series series = select.selectSeries(this.dbLocal.getAllSeries());
+        if (series == null) {
+            return;
+        }
+        associateWork(series);
+    }
+
+    public void associateMovie() {
+        Movie movie = select.selectMovie(this.dbLocal.getAllMovies());
+        if (movie == null) {
+            return;
+        }
+        associateWork(movie);
+    }
+
+    public void associateWork(ItemCatalog work) {
+
+        if (work.getAllDirectors().isEmpty()) {
+            System.out.println("Nenhum diretor cadastrado.");
+            return;
+        }
+        System.out.println("Adicione um direto (digite o número, -1 para encerrar):");
+        for (int i = 0; i < work.getAllDirectors().size(); i++) {
+            System.out.println(i + " - " + work.getAllDirectors().get(i).getName());
+        }
+
+        int idxDire;
+
+        while ((idxDire = Integer.parseInt(scanner.nextLine())) != -1) {
+
+            if (idxDire >= 0 && idxDire < work.getAllDirectors().size()) {
+                work.addDirector(work.getAllDirectors().get(idxDire));
+            } else {
+                System.out.println("Índice inválido.");
+            }
+        }
+
+        System.out.println("Adicione atores (digite o número, -1 para encerrar):");
+        for (int i = 0; i < work.getAllActors().size(); i++) {
+            System.out.println(i + " - " + work.getAllActors().get(i).getName());
+        }
+
+        int idxAtor;
+
+        while ((idxAtor = Integer.parseInt(scanner.nextLine())) != -1) {
+
+            if (idxAtor >= 0 && idxAtor < work.getAllActors().size()) {
+                work.addActor(work.getAllActors().get(idxAtor));
+            } else {
+                System.out.println("Índice inválido.");
+            }
+        }
+        System.out.println("Associação feita com sucesso!");
+    }
 
 }
 

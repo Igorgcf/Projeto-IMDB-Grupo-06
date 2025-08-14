@@ -26,7 +26,13 @@ public class Select {
 
     public Movie selectMovie(List<Movie> movies){
 
+        if (movies.isEmpty()){
+            System.out.println("Nenhum filme cadastrado.");
+            return null;
+        }
+
         System.out.println("Selecione um filme:");
+
         for (int i = 0; i < movies.size(); i++) {
             System.out.println(i + " - " + movies.get(i).getName());
         }
@@ -38,14 +44,17 @@ public class Select {
 
     public Series selectSeries(List<Series> series) {
 
+        if (series.isEmpty()){
+            System.out.println("Nenhuma serie cadastrada.");
+            return null;
+        }
 
         System.out.println("Selecione uma série:");
+
         for (int i = 0; i < series.size(); i++) {
             System.out.println(i + " - " + series.get(i).getName());
         }
         int idx = Integer.parseInt(scanner.nextLine());
-
-
         return series.get(idx);
     }
     
