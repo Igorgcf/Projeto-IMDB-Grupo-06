@@ -30,8 +30,10 @@ public class Menu {
             System.out.println("6. Pesquisar Série por Nome");
             System.out.println("7. Exibir todos as series");
             System.out.println("8. Exibir todos os filmes");
-            System.out.println("9. Associar diretores");
-            System.out.println("10. Associar atores");
+            System.out.println("9. Associar diretores a series");
+            System.out.println("10.Associar atores a series");
+            System.out.println("11.Associar diretores a filmes");
+            System.out.println("12.Associar atores a filmes");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
             opcao = Integer.parseInt(scanner.nextLine());
@@ -45,8 +47,10 @@ public class Menu {
                 case 6 -> catalogService.searchSeries();
                 case 7 -> catalogService.showAllSeries();
                 case 8 -> catalogService.showAllMovies();
-                case 9 -> catalogService.associateSeries();
-                case 10 -> catalogService.associateMovie();
+                case 9 -> catalogService.associateSeriesDirector();
+                case 10 -> catalogService.associateSeriesActor();
+                case 11 -> catalogService.associateMovieDirector();
+                case 12 -> catalogService.associateMovieActor();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida.");
             }

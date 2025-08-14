@@ -112,23 +112,39 @@ public class CatalogService {
 
     }
 
-    public void associateSeries() {
+    public void associateSeriesDirector() {
         Series series = select.selectSeries(this.dbLocal.getAllSeries());
         if (series == null) {
             return;
         }
-        associateWorkSeries(series);
+        associateWorkSeriesDirector(series);
     }
 
-    public void associateMovie() {
+    public void associateMovieDirector() {
         Movie movie = select.selectMovie(this.dbLocal.getAllMovies());
         if (movie == null) {
             return;
         }
-        associateWorkMovie(movie);
+        associateWorkSeriesDirector(movie);
     }
 
-    public void associateWorkSeries(ItemCatalog work) {
+    public void associateSeriesActor() {
+        Series series = select.selectSeries(this.dbLocal.getAllSeries());
+        if (series == null) {
+            return;
+        }
+        associateWorkMovieActor(series);
+    }
+
+    public void associateMovieActor() {
+        Movie movie = select.selectMovie(this.dbLocal.getAllMovies());
+        if (movie == null) {
+            return;
+        }
+        associateWorkMovieActor(movie);
+    }
+
+    public void associateWorkSeriesDirector(ItemCatalog work) {
 
         if (work.getAllDirectors().isEmpty()) {
             System.out.println("Nenhum diretor cadastrado.");
@@ -152,7 +168,7 @@ public class CatalogService {
 
     }
 
-    public void associateWorkMovie(ItemCatalog work) {
+    public void associateWorkMovieActor(ItemCatalog work) {
 
         if (work.getAllActors().isEmpty()) {
             System.out.println("Nenhum ator cadastrado.");
