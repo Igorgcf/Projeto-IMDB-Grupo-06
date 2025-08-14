@@ -24,9 +24,36 @@ static Scanner scanner = new Scanner(System.in);
 
     }
 
-    public void updateMovie(){
+    public void updateMovie(Movie movie){
 
+        System.out.println("Atualização de filme");
 
+        System.out.print("Novo nome (deixe em branco para não alterar): ");
+        String name = scanner.nextLine();
+
+        if (!name.isEmpty()) {
+            movie.setName(name);
+        }
+
+        System.out.print("Nova data de lançamento (Ex: 09-04-2025) (deixe em branco para não alterar): ");
+        String inputDate = scanner.nextLine();
+        if (!inputDate.isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate date = LocalDate.parse(inputDate, formatter);
+            movie.setReleaseDate(date);
+        }
+
+        System.out.print("Duração (deixe em branco para não alterar): ");
+        String durationInput = scanner.nextLine();
+        movie.setDuration(durationInput);
+
+        System.out.print("Nova descrição (deixe em branco para não alterar): ");
+        String description = scanner.nextLine();
+        if (!description.isEmpty()) {
+            movie.setDescription(description);
+        }
+
+        System.out.println("Filme atualizada com sucesso!");
 
     }
 

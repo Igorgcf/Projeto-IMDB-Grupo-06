@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Movie extends ItemCatalog {
 
-    private Time duration;
+    private String duration;
     private Boolean inTheater = false;
 
-    public Movie(String name, String description, Time duration) {
+    public Movie(String name, String description, String duration) {
         super(name, description);
         this.duration = duration;
     }
@@ -22,11 +22,11 @@ public class Movie extends ItemCatalog {
         this.inTheater = inTheater;
     }
 
-    public Time getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 }

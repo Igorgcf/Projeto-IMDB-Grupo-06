@@ -6,6 +6,8 @@ import models.Series;
 import models.User;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Register {
@@ -29,12 +31,18 @@ public class Register {
         String name = scanner.nextLine();
         System.out.print("Descrição: ");
         String description = scanner.nextLine();
-        System.out.println("Duração");
-        Time duration = Time.valueOf(scanner.nextLine());
-
+        System.out.println("Duração em minutos");
+        String duration = scanner.nextLine();
+        System.out.print("Nova data de lançamento (Ex: 09-04-2025) (deixe em branco para não alterar): ");
+        String inputDate = scanner.nextLine();
         Movie movie = new Movie(name, description, duration);
+        if (!inputDate.isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate date = LocalDate.parse(inputDate, formatter);
+            movie.setReleaseDate(date);
+        }
 
-        System.out.println("Série " + movie.getName() + " cadastrada!");
+        System.out.println("Filme " + movie.getName() + " cadastrado!");
 
         return movie;
     }
@@ -49,9 +57,17 @@ public class Register {
         String description = scanner.nextLine();
         System.out.println("Orçamento");
         double budget = Double.parseDouble(scanner.nextLine());
+        System.out.print("Nova data de lançamento (Ex: 09-04-2025) (deixe em branco para não alterar): ");
+        String inputDate = scanner.nextLine();
+        if (!inputDate.isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate date = LocalDate.parse(inputDate, formatter);
+            registerSeries().setReleaseDate(date);
+        }
 
         Series Series = new Series(name, description, seasons);
         Series.setBudget(budget);
+
 
         System.out.println("Série " + Series.getName() + " cadastrada!");
 

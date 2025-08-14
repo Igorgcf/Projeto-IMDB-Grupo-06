@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class CatalogService {
 
     private DbLocal dbLocal;
-    private Register register;
-    private Update update;
-    private Select select;
+    private Register register = new Register();
+    private Update update =  new Update();
+    private Select select =  new Select();
 
     public CatalogService(DbLocal dbLocal) {
         this.dbLocal = dbLocal;
@@ -43,76 +43,76 @@ public class CatalogService {
 
     }
 
+    public void updateMovie(){
 
-    public void findAllSeries() {
+        Movie movie = select.selectMovie(this.dbLocal.getAllMovies());
+        if (movie != null) {
+            update.updateMovie(movie);
+        }
+
+    }
+
+
+    public void showAllSeries() {
 
         if (this.dbLocal.getAllSeries().isEmpty()) {
-            //chamar view System.out.println("Nenhuma série cadastrada.");
+            System.out.println("Nenhuma série cadastrada.");
             return;
         }
-        //chamar view System.out.println("Séries cadastradas:");
+        System.out.println("Séries cadastradas:");
         for (Series serie : this.dbLocal.getAllSeries()) {
-            //chamar view
-            //return selected
+            System.out.println(serie.getName());
+        }
+
+    }
+
+    public void showAllMovies() {
+
+        if (this.dbLocal.getAllMovies().isEmpty()) {
+            System.out.println("Nenhum filme cadastrada.");
+            return;
+        }
+        System.out.println("Filmes cadastradas:");
+        for (Movie movie : this.dbLocal.getAllMovies()) {
+            System.out.println(movie.getName());
         }
 
     }
 
     public void searchSeries() {
-        //chamar view System.out.print("Digite o nome da série: ");
+        System.out.print("Digite o nome da série: ");
         String name = scanner.nextLine();
         if (this.dbLocal.getAllSeries().isEmpty()) {
-            //chamar view System.out.println("Nenhuma série cadastrada.");
+            System.out.println("Nenhuma série cadastrada.");
             return;
         }
         for (Series serie : this.dbLocal.getAllSeries()) {
             if (serie.getName().contains(name)) {
-                //chamar view
-                //return selected
+                System.out.println(serie.getName());
+                return;
             }
         }
-        //chamar view System.out.println("Nenhuma série encontrada.");
-
+        System.out.println("Nenhuma série encontrada.");
     }
 
     public void searchMovie() {
-        //chamar view System.out.print("Digite o nome do filme: ");
+        System.out.print("Digite o nome do filme: ");
         String name = scanner.nextLine();
         if (this.dbLocal.getAllMovies().isEmpty()) {
-            //chamar view System.out.println("Nenhum filme cadastrado.");
+            System.out.println("Nenhum filme cadastrado.");
             return;
         }
         for (Movie movie : this.dbLocal.getAllMovies()) {
             if (movie.getName().contains(name)) {
-                //chamar view
-                //return selected
+                System.out.println(movie.getName());
+                return;
             }
         }
-        //chamar view System.out.println("Nenhuma série encontrada.");
+        System.out.println("Nenhuma série encontrada.");
 
     }
 
-    public void associateSeries() {
-        if (this.dbLocal.getAllSeries().isEmpty()) {
-            System.out.println("Nenhuma série cadastrada.");
-            return;
-        }
-        Series series = select.selectSeries(this.dbLocal.getAllSeries());
-        associateWork(series);
-    }
-
-    public void associateMovie() {
-        if (this.dbLocal.getAllMovies().isEmpty()) {
-            System.out.println("Nenhuma série cadastrada.");
-            return;
-        }
-        Movie movie = select.selectMovie(this.dbLocal.getAllMovies());
-        associateWork(movie);
-    }
-
-    public void associateWork(ItemCatalog work) {
-
-    }
+    
 
 }
 
