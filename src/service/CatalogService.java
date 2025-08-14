@@ -117,7 +117,7 @@ public class CatalogService {
         if (series == null) {
             return;
         }
-        associateWork(series);
+        associateWorkSeries(series);
     }
 
     public void associateMovie() {
@@ -125,10 +125,10 @@ public class CatalogService {
         if (movie == null) {
             return;
         }
-        associateWork(movie);
+        associateWorkMovie(movie);
     }
 
-    public void associateWork(ItemCatalog work) {
+    public void associateWorkSeries(ItemCatalog work) {
 
         if (work.getAllDirectors().isEmpty()) {
             System.out.println("Nenhum diretor cadastrado.");
@@ -150,6 +150,14 @@ public class CatalogService {
             }
         }
 
+    }
+
+    public void associateWorkMovie(ItemCatalog work) {
+
+        if (work.getAllActors().isEmpty()) {
+            System.out.println("Nenhum ator cadastrado.");
+            return;
+        }
         System.out.println("Adicione atores (digite o número, -1 para encerrar):");
         for (int i = 0; i < work.getAllActors().size(); i++) {
             System.out.println(i + " - " + work.getAllActors().get(i).getName());
@@ -167,6 +175,7 @@ public class CatalogService {
         }
         System.out.println("Associação feita com sucesso!");
     }
+
 
 }
 
